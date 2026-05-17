@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Backend Learning Digest</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f3ef;font-family:'Segoe UI',Arial,sans-serif;">
+
+  <!-- Wrapper -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f3ef;padding:32px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:#1a1a1a;border-radius:12px 12px 0 0;padding:28px 32px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <p style="margin:0;font-size:11px;font-weight:600;color:#888;letter-spacing:2px;text-transform:uppercase;">Daily Digest</p>
+                    <h1 style="margin:6px 0 0;font-size:22px;font-weight:600;color:#ffffff;">Backend Learning ⚡</h1>
+                  </td>
+                  <td align="right" style="vertical-align:top;">
+                    <p style="margin:0;font-size:12px;color:#666;">{{date}}</p>
+                    <p style="margin:4px 0 0;font-size:11px;color:#555;">Day {{day_number}} of your roadmap</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Phase Banner -->
+          <tr>
+            <td style="background:{{phase_color}};padding:12px 32px;">
+              <p style="margin:0;font-size:12px;font-weight:600;color:{{phase_text_color}};letter-spacing:1px;">
+                📍 {{phase_label}}
+              </p>
+            </td>
+          </tr>
+
+          <!-- Today's Focus -->
+          <tr>
+            <td style="background:#ffffff;padding:28px 32px 20px;">
+              <h2 style="margin:0 0 6px;font-size:18px;font-weight:600;color:#1a1a1a;">{{topic_title}}</h2>
+              <p style="margin:0;font-size:14px;color:#666;line-height:1.6;">{{topic_description}}</p>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="background:#ffffff;padding:0 32px;">
+              <hr style="border:none;border-top:1px solid #f0eeea;margin:0;"/>
+            </td>
+          </tr>
+
+          <!-- Blog Posts Section -->
+          <tr>
+            <td style="background:#ffffff;padding:20px 32px 8px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <p style="margin:0 0 16px;font-size:11px;font-weight:600;color:#888;letter-spacing:2px;text-transform:uppercase;">
+                      📖 &nbsp;Blogs &amp; Articles
+                    </p>
+                  </td>
+                </tr>
+                {{blog_blocks}}
+              </table>
+            </td>
+          </tr>
+
+          <!-- YouTube Section -->
+          <tr>
+            <td style="background:#ffffff;padding:8px 32px 20px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <p style="margin:16px 0 16px;font-size:11px;font-weight:600;color:#888;letter-spacing:2px;text-transform:uppercase;">
+                      ▶ &nbsp;YouTube Videos
+                    </p>
+                  </td>
+                </tr>
+                {{youtube_blocks}}
+              </table>
+            </td>
+          </tr>
+
+          <!-- Daily Goal -->
+          <tr>
+            <td style="background:#ffffff;padding:0 32px 28px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#f9f8f5;border-radius:8px;border-left:3px solid #1a1a1a;">
+                <tr>
+                  <td style="padding:14px 18px;">
+                    <p style="margin:0 0 4px;font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:1px;">💡 Today's Goal</p>
+                    <p style="margin:0;font-size:13px;color:#333;line-height:1.6;">{{daily_goal}}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Progress Bar -->
+          <tr>
+            <td style="background:#ffffff;padding:0 32px 28px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="font-size:11px;color:#888;">Roadmap progress</td>
+                        <td align="right" style="font-size:11px;color:#888;">{{progress_pct}}% complete</td>
+                      </tr>
+                    </table>
+                    <div style="margin-top:6px;background:#f0eeea;border-radius:4px;height:6px;width:100%;">
+                      <div style="background:#1a1a1a;border-radius:4px;height:6px;width:{{progress_pct}}%;"></div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#1a1a1a;border-radius:0 0 12px 12px;padding:20px 32px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <p style="margin:0;font-size:12px;color:#555;">Keep building. See you tomorrow at 6am IST.</p>
+                  </td>
+                  <td align="right">
+                    <p style="margin:0;font-size:11px;color:#444;">Sent via GitHub Actions 🤖</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

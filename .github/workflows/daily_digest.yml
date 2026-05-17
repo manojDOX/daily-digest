@@ -1,0 +1,72 @@
+# .github/workflows/daily_digest.yml
+#
+# Sends the daily backend learning email at 6:00 AM IST every day.
+# IST = UTC+5:30, so 6:00 AM IST = 00:30 AM UTC.
+#
+# How it works:
+#   1. GitHub's scheduler wakes up at 00:30 UTC
+#   2. Spins up a temporary Ubuntu container
+#   3. Checks out your repo, installs Python deps
+#   4. Runs send_email.py which reads curriculum.py and sends the email
+#   5. Container shuts down. Nothing persists.
+#
+# NOTE: GitHub cron jobs may run a few minutes late during high traffic.
+
+name: Daily Learning Digest
+
+on:
+  schedule:
+    # Cron format: minute hour day month weekday (all UTC)
+    # 6:00 AM IST = 00:30 UTC
+    - cron: "30 0 * * *"
+
+  # Allow manual trigger from GitHub Actions UI (useful for testing)
+  workflow_dispatch:
+    inputs:
+      day_override:
+        description: "Override day number (leave empty for auto)"
+        required: false
+        default: ""
+
+jobs:
+  send-digest:
+    name: Send Daily Email
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── Step 1: Checkout your repo ────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Step 2: Set up Python ─────────────────────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # ── Step 3: Install dependencies ─────────────────────────────────────
+      # No external packages needed — uses only Python stdlib (smtplib, email)
+      # If you add dependencies later, uncomment the pip install line
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # pip install -r requirements.txt  # uncomment if you add packages
+
+      # ── Step 4: Send the email ────────────────────────────────────────────
+      - name: Send daily learning digest
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          START_DATE: ${{ secrets.START_DATE }}
+        run: |
+          # If manual trigger with day override, pass it as argument
+          if [ -n "${{ github.event.inputs.day_override }}" ]; then
+            python send_email.py ${{ github.event.inputs.day_override }}
+          else
+            python send_email.py
+          fi
+
+      # ── Step 5: Log success ───────────────────────────────────────────────
+      - name: Log completion
+        run: echo "Daily digest sent successfully at $(date -u) UTC"
