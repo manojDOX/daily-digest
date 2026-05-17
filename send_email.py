@@ -136,7 +136,7 @@ def build_html(day_number: int) -> str:
     phase_info = PHASES[day_data["phase"]]
 
     template_path = Path(__file__).parent / "templates" / "email_template.html"
-    template = template_path.read_text()
+    template = template_path.read_text(encoding="utf-8")
 
     blog_blocks = "\n".join(build_blog_block(b) for b in day_data["blogs"])
     youtube_blocks = "\n".join(build_youtube_block(v) for v in day_data["youtube"])
