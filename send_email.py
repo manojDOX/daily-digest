@@ -165,7 +165,7 @@ def send_email(day_number: int) -> None:
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = GMAIL_USER
-    msg["To"] = TO_EMAIL
+    msg["To"] = ", ".join(TO_EMAIL.split(","))
 
     # Plain text fallback
     plain = (
@@ -180,7 +180,8 @@ def send_email(day_number: int) -> None:
     print(f"Sending: Day {day_number} — {day_data['topic_title']}")
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(GMAIL_USER, GMAIL_APP_PASS)
-        server.sendmail(GMAIL_USER, TO_EMAIL, msg.as_string())
+        recipients = [email.strip() for email in TO_EMAIL.split(",")]
+        server.sendmail(GMAIL_USER, recipients, msg.as_string())
     print(f"✅ Email sent to {TO_EMAIL}")
 
 

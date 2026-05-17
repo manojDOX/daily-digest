@@ -57,7 +57,7 @@ jobs:
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
-          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          TO_EMAIL: ${{ vars.TO_EMAIL }}
           START_DATE: ${{ secrets.START_DATE }}
         run: |
           # If manual trigger with day override, pass it as argument
